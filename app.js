@@ -4,6 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const chalk = require ("chalk");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -11,13 +12,13 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 
-let employeeArr = [];
+let employeeArray = [];
 
 const initialQuestion = () => {
     inquirer.prompt([
         {
             type: 'list',
-            message: 'What type of employee?',
+            message: 'What type of employee would you like to add?',
             name: 'employeeType',
             choices: [Manager, Engineer, Intern]
         },
@@ -47,44 +48,44 @@ const internQuestions = () => {
 
         {
             type: 'input',
-            message: 'What is the interns name?',
+            message: "What is the intern's name?",
             name: 'internName'
         },
         {
             type: 'input',
-            message: 'What is the interns employee id?',
+            message: "What is the intern's employee ID?",
             name: 'id',
         },
         {
             type: 'input',
-            message: 'What is the interns email?',
+            message: "What is the intern's email?",
             name: 'email',
         },
         {
             type: 'input',
-            message: 'What is the interns school?',
+            message: "What is the intern's school",
             name: 'school',
         },
         {
             type: 'confirm',
-            message: 'Do you need to enter another employee?',
+            message: 'Do you want to enter another employee?',
             name: 'addCheck',
         },
 
     ])
         .then(answers => {
             const intern = new Intern(answers.internName, answers.id, answers.email, answers.school);
-            employeeArr.push(intern);
+            employeeArray.push(intern);
 
-            console.log(employeeArr);
+            console.log(employeeArray);
 
             if (answers.addCheck) {
                 initialQuestion();
             } else {
-                let data = render(employeeArr);
+                let data = render(employeeArray);
                 fs.writeFile(outputPath, data, (err) => {
                     if (err) throw err;
-                    console.log(chalk.green('The file has been saved!'));
+                    console.log(chalk.green('Your file has been saved!'));
                 });
             }
         })
@@ -95,44 +96,44 @@ const engineerQuestions = () => {
 
         {
             type: 'input',
-            message: 'What is the engineers name?',
+            message: "What is the engineer's name?",
             name: 'engineerName'
         },
         {
             type: 'input',
-            message: 'What is engineers employee id?',
+            message: "What is the engineer's employee ID?",
             name: 'id',
         },
         {
             type: 'input',
-            message: 'What is the engineers email?',
+            message: "What is the engineer's email?",
             name: 'email',
         },
         {
             type: 'input',
-            message: 'What is the engineers github username?',
+            message: "What is the engineer's GitHub username?",
             name: 'github',
         },
         {
             type: 'confirm',
-            message: 'Do you need to enter another employee?',
+            message: 'Do you want to enter another employee?',
             name: 'addCheck',
         },
 
     ])
         .then(answers => {
             const engineer = new Engineer(answers.engineerName, answers.id, answers.email, answers.github);
-            employeeArr.push(engineer);
+            employeeArray.push(engineer);
 
-            console.log(employeeArr);
+            console.log(employeeArray);
 
             if (answers.addCheck) {
                 initialQuestion();
             } else {
-                let data = render(employeeArr);
+                let data = render(employeeArray);
                 fs.writeFile(outputPath, data, (err) => {
                     if (err) throw err;
-                    console.log(chalk.green('The file has been saved!'));
+                    console.log(chalk.green('Your file has been saved!'));
                 });
             }
         })
@@ -163,24 +164,24 @@ const managerQuestions = () => {
         },
         {
             type: 'confirm',
-            message: 'Do you need to enter another employee?',
+            message: 'Do you want to enter another employee?',
             name: 'addCheck',
         },
 
     ])
         .then(answers => {
             const manager = new Manager(answers.managerName, answers.id, answers.email, answers.officeNumber);
-            employeeArr.push(manager);
+            employeeArray.push(manager);
 
-            console.log(employeeArr);
+            console.log(employeeArray);
 
             if (answers.addCheck) {
                 initialQuestion();
             } else {
-                let data = render(employeeArr);
+                let data = render(employeeArray);
                 fs.writeFile(outputPath, data, (err) => {
                     if (err) throw err;
-                    console.log(chalk.green('The file has been saved!!!'));
+                    console.log(chalk.green('Your file has been saved!'));
                 });
             }
 
