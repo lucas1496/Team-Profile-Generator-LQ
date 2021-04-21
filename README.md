@@ -4,6 +4,10 @@
     
 - This is a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person.
 
+
+<img width="1336" alt="Screen Shot 2021-04-20 at 11 15 34 PM" src="https://user-images.githubusercontent.com/60542798/115495995-6153a880-a22e-11eb-9ff0-a3a2bb23fe9a.png">
+
+
 ## Table of Contents
 - <a href="#inst">Installation<a>
 - <a href="#use">Usage<a>
